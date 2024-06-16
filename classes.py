@@ -24,8 +24,8 @@ class CurrentAccount(Account):
         if amount > self.balance:
             return "Insufficient funds for withdrawal."
         self.balance -= amount
-        self.cheques_issued+=1
-        return f"Withdrawal successful! Remaining balance: {self.balance}, Cheques issued number: {self.cheques_issued}"
+        self.cheques_issued += 1
+        return f"Withdrawal successful! Remaining balance: {self.balance}, Cheques issued: {self.cheques_issued}"
 
 
 class DepositAccount(Account):
@@ -43,6 +43,10 @@ class DepositAccount(Account):
         self.balance -= amount
         self.withdrawals_count += 1
         return f"Withdrawal successful! Remaining balance: {self.balance}"
+
+    def apply_interest(self):
+        self.balance += self.balance * self.interest_rate
+        return f"Interest applied! New balance: {self.balance}"
 
 
 class RestrictedAccount(CurrentAccount):
@@ -86,6 +90,11 @@ class Bank:
             if account.account_number == account_number:
                 return account.deposit(amount)
         return "Account not found."
+
+    def apply_interest_to_deposit_accounts(self):
+        for account in self.accounts:
+            if isinstance(account, DepositAccount):
+                print(account.apply_interest())
 
     def save_accounts(self, filename):
         with open(filename, 'w') as file:
