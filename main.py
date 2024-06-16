@@ -12,12 +12,14 @@ if __name__ == "__main__":
 
     # Add accounts to the bank
     bank.add_account(acc1)
+    bank.add_account(acc1)
     bank.add_account(acc2)
     bank.add_account(acc3)
     bank.add_account(acc4)
 
     # Perform withdrawals
     print(bank.withdraw_from_account("001", 200))
+    print(bank.withdraw_from_account("001", 300))
     print(bank.withdraw_from_account("002", 500))
     print(bank.withdraw_from_account("003", 400))
     print(bank.withdraw_from_account("004", 600))

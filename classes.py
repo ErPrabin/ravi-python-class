@@ -24,7 +24,8 @@ class CurrentAccount(Account):
         if amount > self.balance:
             return "Insufficient funds for withdrawal."
         self.balance -= amount
-        return f"Withdrawal successful! Remaining balance: {self.balance}"
+        self.cheques_issued+=1
+        return f"Withdrawal successful! Remaining balance: {self.balance}, Cheques issued number: {self.cheques_issued}"
 
 
 class DepositAccount(Account):
